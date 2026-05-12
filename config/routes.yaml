@@ -1,0 +1,72 @@
+# yaml-language-server: $schema=../vendor/symfony/routing/Loader/schema/routing.schema.json
+
+# This file is the entry point to configure the routes of your app.
+# Methods with the #[Route] attribute are automatically imported.
+# See also https://symfony.com/doc/current/routing.html
+
+# To list all registered routes, run the following command:
+#   bin/console debug:router
+
+#controllers:
+#    resource: routing.controllers
+
+
+##### mobile app
+
+customer_login:
+    path:       /api/customer/login
+    controller: Module\Customer\Access\Controller\CustomerController::login
+    methods:    POST
+
+customer_change_store:
+    path:       /api/customer/change-store
+    controller: Module\Customer\Access\Controller\CustomerController::changeStore
+    methods:    POST
+
+offer_list:
+    path:       /api/offer/list
+    controller: Module\Offer\Access\Controller\OfferController::list
+    methods:    GET
+
+offer_details:
+    path:       /api/offer/{id<\d+>}
+    controller: Module\Offer\Access\Controller\OfferController::details
+    methods:    GET
+
+store_list:
+    path:       /api/store/list
+    controller: Module\Store\Access\Controller\StoreController::list
+    methods:    GET
+
+store_details:
+    path:       /api/store/{id<\d+>}
+    controller: Module\Store\Access\Controller\StoreController::details
+    methods:    GET
+
+
+##### CMS
+
+cms_login:
+    path:       /api/admin/user/login
+    controller: Module\User\Access\Controller\UserAdminController::login
+    methods:    POST
+
+cms_offer_filters:
+    path:       /api/admin/offer/filters
+    controller: Module\Offer\Access\Controller\OfferAdminController::filters
+    methods:    GET
+
+cms_offer_list:
+    path:       /api/admin/offer/list
+    controller: Module\Offer\Access\Controller\OfferAdminController::list
+    methods:    GET
+
+cms_offer_details:
+    path:       /api/admin/offer/{id<\d+>}
+    controller: Module\Offer\Access\Controller\OfferAdminController::details
+    methods:    GET
+
+cms_offer_change_visibility:
+    path:       /api/admin/offer/change-visibility
+    controller: Module\Offer\Access\Controller\OfferAdminController::changeVisibility
+    methods:    POST

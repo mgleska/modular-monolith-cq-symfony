@@ -1,0 +1,1087 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "MM-CQ-Symfony",
+        "description": "Modular monolith with Command & Query",
+        "version": "0.1"
+    },
+    "paths": {
+        "/api/customer/login": {
+            "post": {
+                "tags": [
+                    "mobile API"
+                ],
+                "operationId": "post_customer_login",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/LoginRequestDto"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "ONLY FOR DEMO! Login. Endpoint returns new JWT access token for supplied mobile user ID. If given user does not exist in database - will be created.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/TokenResponseDto"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Failed",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/JsonValidationErrorSchema"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": []
+            }
+        },
+        "/api/customer/change-store": {
+            "post": {
+                "tags": [
+                    "mobile API"
+                ],
+                "operationId": "post_customer_change_store",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ChangeStoreRequestDto"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Set store for mobile user. Endpoint sets given store for mobile user and returns new JWT access token with this store.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/TokenResponseDto"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UnauthorizedErrorSchema"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Failed",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/JsonValidationErrorSchema"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/offer/list": {
+            "get": {
+                "tags": [
+                    "mobile API"
+                ],
+                "operationId": "get_offer_list",
+                "parameters": [
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "example": 2,
+                            "nullable": true,
+                            "minimum": 0,
+                            "exclusiveMinimum": true
+                        },
+                        "example": 2
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "List offers. Show list of offers in selected store.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ListResponseDto"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UnauthorizedErrorSchema"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Failed",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/JsonValidationErrorSchema"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/offer/{id}": {
+            "get": {
+                "tags": [
+                    "mobile API"
+                ],
+                "operationId": "get_offer_details",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "pattern": "\\d+"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Show offer. Show details of specific offer.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/OfferDto"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UnauthorizedErrorSchema"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Failed",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/JsonValidationErrorSchema"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/store/list": {
+            "get": {
+                "tags": [
+                    "mobile API"
+                ],
+                "operationId": "get_store_list",
+                "responses": {
+                    "200": {
+                        "description": "Show list of stores.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ListResponseDto2"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UnauthorizedErrorSchema"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/store/{id}": {
+            "get": {
+                "tags": [
+                    "mobile API"
+                ],
+                "operationId": "get_store_details",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "pattern": "\\d+"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Show details of specific store.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/StoreDto"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UnauthorizedErrorSchema"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Failed",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/JsonValidationErrorSchema"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/admin/user/login": {
+            "post": {
+                "tags": [
+                    "CMS"
+                ],
+                "operationId": "post_cms_login",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/AdminLoginRequestDto"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "ONLY FOR DEMO! Login CMS. Endpoint returns token for supplied CMS user (email). If given user does not exist in database - will be created.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AdminTokenResponseDto"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Failed",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/JsonValidationErrorSchema"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": []
+            }
+        },
+        "/api/admin/offer/filters": {
+            "get": {
+                "tags": [
+                    "CMS"
+                ],
+                "operationId": "get_cms_offer_filters",
+                "responses": {
+                    "200": {
+                        "description": "Filters for offer list",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/FiltersResponseDto"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UnauthorizedErrorSchema"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Failed",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/JsonValidationErrorSchema"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/admin/offer/list": {
+            "get": {
+                "tags": [
+                    "CMS"
+                ],
+                "operationId": "get_cms_offer_list",
+                "parameters": [
+                    {
+                        "name": "search",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "nullable": true
+                        }
+                    },
+                    {
+                        "name": "storeId",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "example": 5,
+                            "nullable": true,
+                            "minimum": 0,
+                            "exclusiveMinimum": true
+                        },
+                        "example": 5
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1,
+                            "nullable": true,
+                            "minimum": 0,
+                            "exclusiveMinimum": true
+                        },
+                        "example": 1
+                    },
+                    {
+                        "name": "perPage",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "example": 10,
+                            "nullable": true,
+                            "minimum": 0,
+                            "exclusiveMinimum": true
+                        },
+                        "example": 10
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "List offers. Show list of offers. With selection by store or product name.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ListResponseDto3"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UnauthorizedErrorSchema"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Failed",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/JsonValidationErrorSchema"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/admin/offer/{id}": {
+            "get": {
+                "tags": [
+                    "CMS"
+                ],
+                "operationId": "get_cms_offer_details",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "pattern": "\\d+"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Show offer. Show details of specific offer.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/OfferDto2"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UnauthorizedErrorSchema"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Failed",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/JsonValidationErrorSchema"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/admin/offer/change-visibility": {
+            "post": {
+                "tags": [
+                    "CMS"
+                ],
+                "operationId": "post_cms_offer_change_visibility",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ChangeVisibilityDto"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Change visibility. The endpoint allows to change the visibility of offer."
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UnauthorizedErrorSchema"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Failed",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/JsonValidationErrorSchema"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "LoginRequestDto": {
+                "required": [
+                    "customerId"
+                ],
+                "properties": {
+                    "customerId": {
+                        "type": "integer",
+                        "minimum": 0
+                    }
+                },
+                "type": "object"
+            },
+            "ChangeStoreRequestDto": {
+                "required": [
+                    "storeId"
+                ],
+                "properties": {
+                    "storeId": {
+                        "type": "integer",
+                        "minimum": 0,
+                        "exclusiveMinimum": true
+                    }
+                },
+                "type": "object"
+            },
+            "ListParamDto": {
+                "properties": {
+                    "page": {
+                        "type": "integer",
+                        "example": 2,
+                        "nullable": true,
+                        "minimum": 0,
+                        "exclusiveMinimum": true
+                    }
+                },
+                "type": "object"
+            },
+            "AdminLoginRequestDto": {
+                "required": [
+                    "email"
+                ],
+                "properties": {
+                    "email": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "ListParamDto2": {
+                "properties": {
+                    "search": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "storeId": {
+                        "type": "integer",
+                        "example": 5,
+                        "nullable": true,
+                        "minimum": 0,
+                        "exclusiveMinimum": true
+                    },
+                    "page": {
+                        "type": "integer",
+                        "example": 1,
+                        "nullable": true,
+                        "minimum": 0,
+                        "exclusiveMinimum": true
+                    },
+                    "perPage": {
+                        "type": "integer",
+                        "example": 10,
+                        "nullable": true,
+                        "minimum": 0,
+                        "exclusiveMinimum": true
+                    }
+                },
+                "type": "object"
+            },
+            "ChangeVisibilityDto": {
+                "required": [
+                    "id",
+                    "version",
+                    "visible"
+                ],
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": 45
+                    },
+                    "version": {
+                        "type": "integer",
+                        "example": 2
+                    },
+                    "visible": {
+                        "type": "boolean",
+                        "example": false
+                    }
+                },
+                "type": "object"
+            },
+            "TokenResponseDto": {
+                "required": [
+                    "token"
+                ],
+                "properties": {
+                    "token": {
+                        "type": "string",
+                        "example": "JWT access_token"
+                    }
+                },
+                "type": "object"
+            },
+            "JsonValidationViolationsSchema": {
+                "required": [
+                    "propertyPath",
+                    "title"
+                ],
+                "properties": {
+                    "propertyPath": {
+                        "type": "string",
+                        "example": "id"
+                    },
+                    "title": {
+                        "type": "string",
+                        "example": "This value should be of type int."
+                    }
+                },
+                "type": "object"
+            },
+            "JsonValidationErrorSchema": {
+                "required": [
+                    "detail",
+                    "violations"
+                ],
+                "properties": {
+                    "type": {
+                        "type": "string",
+                        "default": "https://symfony.com/errors/validation"
+                    },
+                    "title": {
+                        "type": "string",
+                        "default": "Validation Failed"
+                    },
+                    "status": {
+                        "type": "integer",
+                        "default": 422
+                    },
+                    "detail": {
+                        "type": "string",
+                        "example": "id: This value should be of type int."
+                    },
+                    "violations": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/JsonValidationViolationsSchema"
+                        }
+                    }
+                },
+                "type": "object"
+            },
+            "UnauthorizedErrorSchema": {
+                "properties": {
+                    "type": {
+                        "type": "string",
+                        "default": "https://tools.ietf.org/html/rfc2616#section-10"
+                    },
+                    "title": {
+                        "type": "string",
+                        "default": "An error occurred"
+                    },
+                    "status": {
+                        "type": "integer",
+                        "default": 401
+                    },
+                    "detail": {
+                        "type": "string",
+                        "default": "Unauthorized"
+                    }
+                },
+                "type": "object"
+            },
+            "OfferShortDto": {
+                "required": [
+                    "id",
+                    "productEan",
+                    "productName",
+                    "price"
+                ],
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": 45
+                    },
+                    "productEan": {
+                        "type": "string",
+                        "example": "8410564006257"
+                    },
+                    "productName": {
+                        "type": "string",
+                        "example": "Red square"
+                    },
+                    "price": {
+                        "description": "amount in 0,01 of 1 PLN",
+                        "type": "integer",
+                        "example": 805
+                    },
+                    "lowestPrice": {
+                        "description": "amount in 0,01 of 1 PLN",
+                        "type": "integer",
+                        "example": 950,
+                        "nullable": true
+                    }
+                },
+                "type": "object"
+            },
+            "ListResponseDto": {
+                "required": [
+                    "items",
+                    "page",
+                    "perPage"
+                ],
+                "properties": {
+                    "items": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/OfferShortDto"
+                        }
+                    },
+                    "page": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "perPage": {
+                        "type": "integer",
+                        "example": 5
+                    }
+                },
+                "type": "object"
+            },
+            "QuantityLevelEnum": {
+                "type": "string",
+                "enum": [
+                    "unknown",
+                    "available",
+                    "available_low"
+                ]
+            },
+            "OfferDto": {
+                "required": [
+                    "id",
+                    "productEan",
+                    "productName",
+                    "price",
+                    "imageUrl",
+                    "quantityLevel"
+                ],
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": 45
+                    },
+                    "productEan": {
+                        "type": "string",
+                        "example": "8410564006257"
+                    },
+                    "productName": {
+                        "type": "string",
+                        "example": "Red square"
+                    },
+                    "price": {
+                        "description": "amount in 0,01 of 1 PLN",
+                        "type": "integer",
+                        "example": 805
+                    },
+                    "lowestPrice": {
+                        "description": "amount in 0,01 of 1 PLN",
+                        "type": "integer",
+                        "example": 950,
+                        "nullable": true
+                    },
+                    "imageUrl": {
+                        "type": "string",
+                        "example": "https://my.images.com/red-square.png"
+                    },
+                    "quantityLevel": {
+                        "$ref": "#/components/schemas/QuantityLevelEnum"
+                    }
+                },
+                "type": "object"
+            },
+            "StoreShortDto": {
+                "required": [
+                    "id",
+                    "externalId",
+                    "name"
+                ],
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": 5
+                    },
+                    "externalId": {
+                        "type": "string",
+                        "example": "r002"
+                    },
+                    "name": {
+                        "type": "string",
+                        "example": "Lubo\u0144"
+                    }
+                },
+                "type": "object"
+            },
+            "ListResponseDto2": {
+                "required": [
+                    "items"
+                ],
+                "properties": {
+                    "items": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/StoreShortDto"
+                        }
+                    }
+                },
+                "type": "object"
+            },
+            "StoreDto": {
+                "required": [
+                    "id",
+                    "externalId",
+                    "name",
+                    "address"
+                ],
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": 5
+                    },
+                    "externalId": {
+                        "type": "string",
+                        "example": "r002"
+                    },
+                    "name": {
+                        "type": "string",
+                        "example": "Lubo\u0144"
+                    },
+                    "address": {
+                        "type": "string",
+                        "example": "ul. Pozna\u0144ska 1"
+                    }
+                },
+                "type": "object"
+            },
+            "AdminTokenResponseDto": {
+                "required": [
+                    "token"
+                ],
+                "properties": {
+                    "token": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "StoreDto2": {
+                "required": [
+                    "storeId",
+                    "storeName"
+                ],
+                "properties": {
+                    "storeId": {
+                        "type": "integer",
+                        "example": 5
+                    },
+                    "storeName": {
+                        "type": "string",
+                        "example": "Lubo\u0144"
+                    }
+                },
+                "type": "object"
+            },
+            "FiltersResponseDto": {
+                "required": [
+                    "stores"
+                ],
+                "properties": {
+                    "stores": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/StoreDto2"
+                        }
+                    }
+                },
+                "type": "object"
+            },
+            "OfferShortDto2": {
+                "required": [
+                    "id",
+                    "storeName",
+                    "visible",
+                    "productEan",
+                    "productName",
+                    "price"
+                ],
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": 45
+                    },
+                    "storeName": {
+                        "type": "string",
+                        "example": "Lubo\u0144"
+                    },
+                    "visible": {
+                        "type": "boolean",
+                        "example": true
+                    },
+                    "productEan": {
+                        "type": "string",
+                        "example": "8410564006257"
+                    },
+                    "productName": {
+                        "type": "string",
+                        "example": "Red square"
+                    },
+                    "price": {
+                        "description": "amount in 0,01 of 1 PLN",
+                        "type": "integer",
+                        "example": 805
+                    }
+                },
+                "type": "object"
+            },
+            "ListResponseDto3": {
+                "required": [
+                    "items",
+                    "page",
+                    "perPage"
+                ],
+                "properties": {
+                    "items": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/OfferShortDto2"
+                        }
+                    },
+                    "page": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "perPage": {
+                        "type": "integer",
+                        "example": 10
+                    }
+                },
+                "type": "object"
+            },
+            "OfferDto2": {
+                "required": [
+                    "id",
+                    "version",
+                    "visible",
+                    "productEan",
+                    "productName",
+                    "price",
+                    "imageUrl"
+                ],
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": 45
+                    },
+                    "version": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "visible": {
+                        "type": "boolean",
+                        "example": true
+                    },
+                    "productEan": {
+                        "type": "string",
+                        "example": "8410564006257"
+                    },
+                    "productName": {
+                        "type": "string",
+                        "example": "Red square"
+                    },
+                    "price": {
+                        "description": "amount in 0,01 of 1 PLN",
+                        "type": "integer",
+                        "example": 805
+                    },
+                    "lowestPrice": {
+                        "description": "amount in 0,01 of 1 PLN",
+                        "type": "integer",
+                        "example": 950,
+                        "nullable": true
+                    },
+                    "imageUrl": {
+                        "type": "string",
+                        "example": "https://my.images.com/red-square.png"
+                    },
+                    "quantity": {
+                        "type": "integer",
+                        "example": 7000,
+                        "nullable": true
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "securitySchemes": {
+            "Bearer": {
+                "type": "http",
+                "scheme": "bearer"
+            }
+        }
+    },
+    "security": [
+        {
+            "Bearer": []
+        }
+    ],
+    "tags": [
+        {
+            "name": "mobile API"
+        },
+        {
+            "name": "CMS"
+        }
+    ]
+}
