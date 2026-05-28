@@ -9,12 +9,12 @@
         "ext-iconv": "*",
         "doctrine/doctrine-bundle": "^3.2.2",
         "doctrine/doctrine-migrations-bundle": "^4.0",
-        "doctrine/orm": "^3.6.3",
-        "firebase/php-jwt": "^7.0",
-        "nelmio/cors-bundle": "^2.6",
+        "doctrine/orm": "^3.6.6",
+        "firebase/php-jwt": "^7.0.5",
+        "nelmio/cors-bundle": "^2.6.1",
         "phpdocumentor/reflection-docblock": "^6.0.3",
         "phpstan/phpdoc-parser": "^2.3.2",
-        "stof/doctrine-extensions-bundle": "^1.15",
+        "stof/doctrine-extensions-bundle": "^1.15.3",
         "symfony/console": "7.4.*",
         "symfony/dotenv": "7.4.*",
         "symfony/flex": "^2.10",
@@ -25,21 +25,28 @@
         "symfony/security-bundle": "7.4.*",
         "symfony/serializer": "7.4.*",
         "symfony/uid": "7.4.*",
-        "symfony/validator": "^7.4",
+        "symfony/validator": "^7.4.10",
         "symfony/yaml": "7.4.*"
     },
     "require-dev": {
-        "deptrac/deptrac": "^4.6",
-        "friendsofphp/php-cs-fixer": "^3.95.1",
-        "nelmio/api-doc-bundle": "^5.10",
-        "phpstan/phpstan": "^2.1.54",
-        "phpstan/phpstan-doctrine": "^2.0",
-        "phpstan/phpstan-symfony": "^2.0.15",
+        "dama/doctrine-test-bundle": "^8.6",
+        "deptrac/deptrac": "^4.6.1",
+        "friendsofphp/php-cs-fixer": "^3.95.2",
+        "nelmio/api-doc-bundle": "^5.10.2",
+        "phpstan/phpstan": "^2.1.55",
+        "phpstan/phpstan-doctrine": "^2.0.22",
+        "phpstan/phpstan-symfony": "^2.0.18",
+        "phpunit/phpunit": "^13.1.11",
+        "symfony/ai-mate": "^0.9.0",
+        "symfony/ai-symfony-mate-extension": "^0.9.0",
+        "symfony/browser-kit": "7.4.*",
+        "symfony/css-selector": "7.4.*",
         "symfony/maker-bundle": "^1.67"
     },
     "config": {
         "allow-plugins": {
             "php-http/discovery": true,
+            "symfony/ai-mate-composer-plugin": true,
             "symfony/flex": true,
             "symfony/runtime": true
         },
@@ -53,7 +60,8 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "App\\Tests\\": "tests/"
+            "Tests\\": "tests/",
+            "Mate\\": "mate/src/"
         }
     },
     "replace": {
@@ -88,6 +96,9 @@
         "deptrac": [
             "@php vendor/bin/deptrac analyse --config-file=deptrac.yaml --cache-file=/tmp/deptrac.cache --report-uncovered"
         ],
+        "coverage": [
+            "XDEBUG_MODE=coverage php -d memory_limit=4G bin/phpunit --cache-directory=/tmp/phpunit --coverage-html coverage"
+        ],
         "openapi": [
             "@php bin/console nelmio:apidoc:dump --format=json > public/openapi.json",
             "@php bin/console nelmio:apidoc:dump --format=yaml > public/openapi.yaml"
@@ -101,6 +112,15 @@
             "allow-contrib": true,
             "require": "7.4.*",
             "docker": true
+        },
+        "ai-mate": {
+            "extension": false,
+            "scan-dirs": [
+                "mate/src"
+            ],
+            "includes": [
+                "mate/config.php"
+            ]
         }
     }
 }

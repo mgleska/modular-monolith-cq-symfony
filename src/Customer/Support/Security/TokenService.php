@@ -9,6 +9,7 @@ use Firebase\JWT\ExpiredException;
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
 use Firebase\JWT\SignatureInvalidException;
+use Module\Shared\Exception\AppNeverException;
 use Module\Shared\Exception\AppUnauthorizedException;
 use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\NotFoundExceptionInterface;
@@ -71,6 +72,11 @@ class TokenService
      */
     private function getKey(): string
     {
-        return $this->params->get('kernel.secret');
+        $key = $this->params->get('kernel.secret');
+        if (empty($key)) {
+            throw new AppNeverException('Not found configuration parameter "kernel.secret"');
+        }
+
+        return $key;
     }
 }

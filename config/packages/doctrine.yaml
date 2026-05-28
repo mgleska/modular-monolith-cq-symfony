@@ -17,33 +17,33 @@ doctrine:
 #            App:
 #                type: attribute
 #                is_bundle: false
-#                dir: '%kernel.project_dir%/src/Entity'
-#                prefix: 'App\Entity'
+#                dir: '%kernel.project_dir%/src/Model'
+#                prefix: 'App\Model'
             Customer:
                 type: attribute
                 is_bundle: false
-                dir: '%kernel.project_dir%/src/Customer/Entity'
-                prefix: 'Module\Customer\Entity'
+                dir: '%kernel.project_dir%/src/Customer/Model'
+                prefix: 'Module\Customer\Model'
             Offer:
                 type: attribute
                 is_bundle: false
-                dir: '%kernel.project_dir%/src/Offer/Entity'
-                prefix: 'Module\Offer\Entity'
+                dir: '%kernel.project_dir%/src/Offer/Model'
+                prefix: 'Module\Offer\Model'
             Product:
                 type: attribute
                 is_bundle: false
-                dir: '%kernel.project_dir%/src/Product/Entity'
-                prefix: 'Module\Product\Entity'
+                dir: '%kernel.project_dir%/src/Product/Model'
+                prefix: 'Module\Product\Model'
             Store:
                 type: attribute
                 is_bundle: false
-                dir: '%kernel.project_dir%/src/Store/Entity'
-                prefix: 'Module\Store\Entity'
+                dir: '%kernel.project_dir%/src/Store/Model'
+                prefix: 'Module\Store\Model'
             User:
                 type: attribute
                 is_bundle: false
-                dir: '%kernel.project_dir%/src/User/Entity'
-                prefix: 'Module\User\Entity'
+                dir: '%kernel.project_dir%/src/User/Model'
+                prefix: 'Module\User\Model'
         filters:
             softdeleteable:
                 class: Gedmo\SoftDeleteable\Filter\SoftDeleteableFilter

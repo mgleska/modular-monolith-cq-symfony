@@ -9,6 +9,7 @@ use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Output\OutputInterface;
 
+/** @codeCoverageIgnore */
 #[AsCommand(
     name: 'offer:import',
     description: 'Command to import offers for given store.'

@@ -5,15 +5,14 @@ namespace Module\Customer\Action\Command;
 
 use Module\Customer\Action\Dto\ChangeStoreRequestDto;
 use Module\Customer\Action\Dto\TokenResponseDto;
+use Module\Customer\Model\CustomerRepository;
 use Module\Customer\Support\CustomerBag;
-use Module\Customer\Support\CustomerRepository;
 use Module\Customer\Support\Security\TokenService;
 use Module\Shared\Exception\AppNeverException;
 use Module\Shared\Exception\AppValidationException;
 use Module\Store\Action\Query\CheckStoreExistsQry;
 use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\NotFoundExceptionInterface;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class ChangeStoreCmd
 {
@@ -31,7 +30,7 @@ class ChangeStoreCmd
      */
     public function handle(ChangeStoreRequestDto $dto): TokenResponseDto
     {
-        if (!$this->checkStoreExistsQry->check($dto->storeId)) {
+        if (! $this->checkStoreExistsQry->check($dto->storeId)) {
             throw new AppValidationException('storeId', 'Invalid store id');
         }
 
@@ -40,8 +39,8 @@ class ChangeStoreCmd
         }
 
         $customer = $this->repository->find($this->customerBag->customerId);
-        if (!$customer) {
-            throw new NotFoundHttpException('Customer not found.');
+        if (! $customer) {
+            throw new AppNeverException('Customer not found.');
         }
         $customer->setSelectedStore($dto->storeId);
         $this->repository->save($customer, true);

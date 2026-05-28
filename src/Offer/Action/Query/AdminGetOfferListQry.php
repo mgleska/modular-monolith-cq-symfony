@@ -10,7 +10,7 @@ use Doctrine\ORM\Tools\Pagination\Paginator;
 use Module\Offer\Action\Dto\Admin\ListParamDto;
 use Module\Offer\Action\Dto\Admin\ListResponseDto;
 use Module\Offer\Action\Dto\Admin\OfferShortDto;
-use Module\Offer\Entity\Offer;
+use Module\Offer\Model\Offer;
 use Module\Product\Action\Query\JoinProductByIdDqlQry;
 use Module\Store\Action\Query\JoinStoreByIdDqlQry;
 

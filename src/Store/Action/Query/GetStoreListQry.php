@@ -6,7 +6,7 @@ namespace Module\Store\Action\Query;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Module\Store\Action\Dto\StoreShortDto;
-use Module\Store\Entity\Store;
+use Module\Store\Model\Store;
 
 class GetStoreListQry
 {

@@ -8,6 +8,7 @@ use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Output\OutputInterface;
 
+/** @codeCoverageIgnore */
 #[AsCommand(
     name: 'product:import',
     description: 'Command to import products from external dictionary (API)'

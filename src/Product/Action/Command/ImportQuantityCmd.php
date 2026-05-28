@@ -6,11 +6,12 @@ namespace Module\Product\Action\Command;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\EntityManagerInterface;
-use Module\Product\Entity\Product;
-use Module\Product\Entity\ProductQuantity;
-use Module\Product\Support\ProductRepository;
+use Module\Product\Model\Product;
+use Module\Product\Model\ProductQuantity;
+use Module\Product\Model\ProductRepository;
 use Module\Store\Action\Query\GetStoreListQry;
 
+/** @codeCoverageIgnore */
 class ImportQuantityCmd
 {
     public function __construct(

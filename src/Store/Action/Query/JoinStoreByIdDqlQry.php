@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Module\Store\Action\Query;
 
 use Module\Shared\Dto\JoinDqlDto;
-use Module\Store\Entity\Store;
+use Module\Store\Model\Store;
 
 class JoinStoreByIdDqlQry
 {

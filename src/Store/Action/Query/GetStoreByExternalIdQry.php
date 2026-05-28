@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Module\Store\Action\Query;
 
 use Module\Store\Action\Dto\StoreShortDto;
-use Module\Store\Support\StoreRepository;
+use Module\Store\Model\StoreRepository;
 
 class GetStoreByExternalIdQry
 {

@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace Module\Product\Action\Query;
 
 use Module\Product\Action\Dto\ProductDetailsDto;
-use Module\Product\Support\ProductQuantityRepository;
-use Module\Product\Support\ProductRepository;
+use Module\Product\Model\ProductQuantityRepository;
+use Module\Product\Model\ProductRepository;
 use Module\Shared\Exception\AppNeverException;
 
 class GetProductDetailsQry

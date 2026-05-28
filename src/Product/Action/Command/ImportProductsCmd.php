@@ -7,8 +7,9 @@ namespace Module\Product\Action\Command;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\DBAL\ArrayParameterType;
 use Doctrine\ORM\EntityManagerInterface;
-use Module\Product\Entity\Product;
+use Module\Product\Model\Product;
 
+/** @codeCoverageIgnore */
 class ImportProductsCmd
 {
     public function __construct(
@@ -46,7 +47,7 @@ class ImportProductsCmd
             $dbAll = $query->getResult();
 
             foreach ($col as $item) {
-                if (!array_key_exists($item['ean'], $dbAll)) {
+                if (! array_key_exists($item['ean'], $dbAll)) {
                     $product = new Product()
                         ->setEan($item['ean'])
                         ->setName($item['name'])

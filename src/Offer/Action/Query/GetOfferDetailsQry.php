@@ -6,7 +6,7 @@ namespace Module\Offer\Action\Query;
 use Module\Customer\Action\Query\GetCurrentCustomerStoreIdQry;
 use Module\Offer\Action\Dto\OfferDto;
 use Module\Offer\Action\Enum\QuantityLevelEnum;
-use Module\Offer\Support\OfferRepository;
+use Module\Offer\Model\OfferRepository;
 use Module\Product\Action\Query\GetProductDetailsQry;
 use Module\Shared\Exception\AppValidationException;
 
@@ -53,7 +53,7 @@ class GetOfferDetailsQry
             productName: $offer->getProductName() ?? $product->name,
             price: $offer->getPrice(),
             lowestPrice: $offer->getLowestPrice(),
-            imageUrl: $product->imageUrl,
+            imageUrl: $product->imageUrl ?? '',
             quantityLevel: $quantityLevel,
         );
     }

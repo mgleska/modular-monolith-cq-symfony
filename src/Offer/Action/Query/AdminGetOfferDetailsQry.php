@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Module\Offer\Action\Query;
 
 use Module\Offer\Action\Dto\Admin\OfferDto;
-use Module\Offer\Support\OfferRepository;
+use Module\Offer\Model\OfferRepository;
 use Module\Product\Action\Query\GetProductDetailsQry;
 use Module\Shared\Exception\AppValidationException;
 

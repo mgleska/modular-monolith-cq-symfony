@@ -6,9 +6,9 @@ namespace Module\User\Action\Command;
 
 use Module\User\Action\Dto\AdminLoginRequestDto;
 use Module\User\Action\Dto\AdminTokenResponseDto;
-use Module\User\Entity\User;
+use Module\User\Model\User;
+use Module\User\Model\UserRepository;
 use Module\User\Support\TokenService;
-use Module\User\Support\UserRepository;
 use Random\RandomException;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 

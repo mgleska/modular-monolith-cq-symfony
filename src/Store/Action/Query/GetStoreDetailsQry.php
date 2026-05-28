@@ -6,7 +6,7 @@ namespace Module\Store\Action\Query;
 
 use Module\Shared\Exception\AppValidationException;
 use Module\Store\Action\Dto\StoreDto;
-use Module\Store\Support\StoreRepository;
+use Module\Store\Model\StoreRepository;
 
 class GetStoreDetailsQry
 {

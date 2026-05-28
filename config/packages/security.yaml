@@ -8,7 +8,7 @@ security:
         # used to reload user from session & other features (e.g. switch_user)
         cms_user_provider:
             entity:
-                class: Module\User\Entity\User
+                class: Module\User\Model\User
                 property: email
         customer_provider:
             id: Module\Customer\Support\Security\CustomerProvider

@@ -7,7 +7,7 @@ namespace Module\Product\Action\Query;
 use Doctrine\DBAL\ArrayParameterType;
 use Doctrine\ORM\EntityManagerInterface;
 use Module\Product\Action\Dto\ProductShortDto;
-use Module\Product\Entity\Product;
+use Module\Product\Model\Product;
 
 class GetProductByEansQry
 {

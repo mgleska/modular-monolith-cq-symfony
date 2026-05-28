@@ -8,6 +8,7 @@ use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Output\OutputInterface;
 
+/** @codeCoverageIgnore */
 #[AsCommand(
     name: 'product:quantity',
     description: 'Command to import quantities for each products in all stores (API)'

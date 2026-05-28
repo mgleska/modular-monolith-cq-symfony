@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Module\User\Support;
 
+use Module\User\Model\UserRepository;
 use Random\RandomException;
 use Symfony\Component\Security\Core\Exception\BadCredentialsException;
 

@@ -199,7 +199,7 @@ src/
    Customer/
       Access/
       Action/
-      Entity/
+      Model/
       Support/
    Offer/
       Access/
@@ -207,7 +207,7 @@ src/
 ```
 Directory `Access/` holds the first layer of the module.\
 Directory `Action/` holds the second layer.\
-Directories `Entity/` and `Support/` holds the third layer.
+Directories `Model/` and `Support/` holds the third layer.
 
 At level 3 below `src/*/` directory, we have the following directories:
 ```text
@@ -221,7 +221,7 @@ src/
          Dto/
          Enum/
          Query/
-      Entity/
+      Model/
       Support/
          Dto/  - (internal DTO)
          {whatever required}/
@@ -254,6 +254,11 @@ To generate `openapi.yaml` file use: `composer openapi`
 
 `composer cs-fixer`
 
+### Testing
+
+`php bin/phpunit`
+
+`composer coverage`
 
 ## Usage:
 
@@ -292,7 +297,7 @@ Result will look like this:
     "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhY2MiLCJ1aWQiOjEyLCJzdGlkIjowLCJleHAiOjE3Nzc2ODE0OTR9.jtFxJUZKE1yTt7XrPzQD6SmL6YNLvhwxnqcamjHxTbk"
 }
 ```
-This JWT access token contains generated user ID (probabbly 1) and is valid for 8 hours.\
+This JWT access token contains generated user ID (probably 1) and is valid for 8 hours.\
 It is regular JWT token, signed, not encrypted. Its content can be viewed on https://jwt.io \
 Now user should select a preferred store. So we have to list available stores:
 ```shell
@@ -315,7 +320,7 @@ Result is:
     "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhY2MiLCJ1aWQiOjEyLCJzdGlkIjoyLCJleHAiOjE3Nzc2ODY1ODJ9.spdbTmIvaJgYbBcC8H6-BuFNr2DuMveH1Q8UT7bF1xM"
 }
 ```
-It is our final access token, with user ID=1 and store ID=2.\
+It is our final access token, with user ID=12 and store ID=2.\
 Now we can see list of offers in store with ID=2:
 ```shell
 curl --location 'http://127.0.0.1:86/api/offer/list' \
@@ -506,8 +511,3 @@ Backend checks command pre-condition and see, that shipment was already modified
 So backend may answer with a user-friendly message that user's command cannot be done.
 
 This approach allows to encapsulate domain logic related to the command "I would like to send this shipment for acceptance" in PHP class designed strictly for this one command.
-
-
-## ToDo
-
-Unit and feature tests.

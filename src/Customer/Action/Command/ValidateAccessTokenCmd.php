@@ -28,7 +28,7 @@ class ValidateAccessTokenCmd implements AccessTokenHandlerInterface
     {
         $payload = $this->tokenService->decodeAccessToken($accessToken);
 
-        if (!isset($payload['uid'])) {
+        if (! isset($payload['uid'])) {
             throw new AppNeverException('Missing "uid" in JWT token');
         }
 

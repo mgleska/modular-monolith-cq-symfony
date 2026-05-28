@@ -9,7 +9,7 @@ use Module\Customer\Action\Query\GetCurrentCustomerStoreIdQry;
 use Module\Offer\Action\Dto\ListParamDto;
 use Module\Offer\Action\Dto\ListResponseDto;
 use Module\Offer\Action\Dto\OfferShortDto;
-use Module\Offer\Entity\Offer;
+use Module\Offer\Model\Offer;
 use Module\Product\Action\Query\JoinProductByIdDqlQry;
 
 class GetOfferListQry

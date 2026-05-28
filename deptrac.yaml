@@ -223,6 +223,7 @@ deptrac:
       - Shared
       - Vendor
     CustomerOther:
+      - CustomerModel
       - +AllActionTemplate
 
     OfferAccess:
@@ -242,6 +243,7 @@ deptrac:
       - Shared
       - Vendor
     OfferOther:
+      - OfferModel
       - +AllActionTemplate
 
     ProductAccess:
@@ -261,6 +263,7 @@ deptrac:
       - Shared
       - Vendor
     ProductOther:
+      - ProductModel
       - +AllActionTemplate
 
     StoreAccess:
@@ -280,6 +283,7 @@ deptrac:
       - Shared
       - Vendor
     StoreOther:
+      - StoreModel
       - +AllActionTemplate
 
     UserAccess:
@@ -299,6 +303,7 @@ deptrac:
       - Shared
       - Vendor
     UserOther:
+      - UserModel
       - +AllActionTemplate
 
     Shared:

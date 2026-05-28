@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Module\Customer\Support\Security;
 
-use Module\Customer\Entity\Customer;
+use Module\Customer\Action\Enum\CustomerStatusEnum;
+use Module\Customer\Model\Customer;
 use Module\Customer\Support\CustomerBag;
 use Module\Shared\Exception\AppUnauthorizedException;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
@@ -31,16 +32,17 @@ class CustomerProvider implements UserProviderInterface
             throw new AppUnauthorizedException('Unexpected customer identifier.');
         }
 
-        return new Customer()
-            ->setId($this->customerBag->customerId)
-            ->setSelectedStore($this->customerBag->selectedStoreId)
-            ->setName('')
-        ;
+        return Customer::factory(
+            name: '',
+            selectedStore: $this->customerBag->selectedStoreId,
+            status: CustomerStatusEnum::ACTIVE,
+            id: $this->customerBag->customerId
+        );
     }
 
     public function refreshUser(UserInterface $user): UserInterface
     {
-        if (!$user instanceof Customer) {
+        if (! $user instanceof Customer) {
             throw new UnsupportedUserException(sprintf('Invalid user class "%s".', $user::class));
         }
 

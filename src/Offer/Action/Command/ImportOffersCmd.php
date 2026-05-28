@@ -7,13 +7,14 @@ namespace Module\Offer\Action\Command;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\DBAL\ArrayParameterType;
 use Doctrine\ORM\EntityManagerInterface;
-use Module\Offer\Entity\Offer;
-use Module\Offer\Support\OfferRepository;
+use Module\Offer\Model\Offer;
+use Module\Offer\Model\OfferRepository;
 use Module\Product\Action\Query\GetProductByEansQry;
 use Module\Shared\Exception\AppValidationException;
 use Module\Store\Action\Query\GetStoreByExternalIdQry;
 use Symfony\Component\Uid\Uuid;
 
+/** @codeCoverageIgnore */
 class ImportOffersCmd
 {
     public function __construct(
@@ -44,7 +45,7 @@ class ImportOffersCmd
             ->map(function (array $item) {return $item['product_ean']; })
             ->toArray();
 
-        $this->em->beginTransaction();
+        $this->repository->beginTransaction();
         try {
             $builder = $this->repository->createQueryBuilder('o');
             $query = $builder
@@ -63,7 +64,7 @@ class ImportOffersCmd
             $eanOfferMap = [];
 
             foreach ($col as $item) {
-                if (!array_key_exists($item['product_ean'], $dbAll)) {
+                if (! array_key_exists($item['product_ean'], $dbAll)) {
                     $offer = new Offer()
                         ->setStoreId($store->id)
                         ->setExternalId($item['external_id'])
@@ -95,12 +96,12 @@ class ImportOffersCmd
                 $eanOfferMap[$dto->ean]->setProductId($dto->id);
             }
 
-            $this->em->flush();
+            $this->repository->flush();
 
-            $this->em->commit();
+            $this->repository->commit();
         }
         catch (\Throwable $e) {
-            $this->em->rollback();
+            $this->repository->rollback();
             throw $e;
         }
     }

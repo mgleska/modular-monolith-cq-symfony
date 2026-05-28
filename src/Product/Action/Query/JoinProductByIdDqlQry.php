@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Module\Product\Action\Query;
 
-use Module\Product\Entity\Product;
+use Module\Product\Model\Product;
 use Module\Shared\Dto\JoinDqlDto;
 
 class JoinProductByIdDqlQry

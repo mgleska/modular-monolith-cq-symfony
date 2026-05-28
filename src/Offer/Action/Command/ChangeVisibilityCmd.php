@@ -5,16 +5,14 @@ declare(strict_types=1);
 namespace Module\Offer\Action\Command;
 
 use Doctrine\DBAL\LockMode;
-use Doctrine\ORM\EntityManagerInterface;
 use Module\Offer\Action\Dto\Admin\ChangeVisibilityDto;
-use Module\Offer\Support\OfferRepository;
+use Module\Offer\Model\OfferRepository;
 use Module\Shared\Exception\AppEntityVersionException;
 use Module\Shared\Exception\AppValidationException;
 
 class ChangeVisibilityCmd
 {
     public function __construct(
-        private readonly EntityManagerInterface $em,
         private readonly OfferRepository $repository,
     ) {
     }
@@ -24,7 +22,7 @@ class ChangeVisibilityCmd
      */
     public function handle(ChangeVisibilityDto $dto): void
     {
-        $this->em->beginTransaction();
+        $this->repository->beginTransaction();
 
         try {
             $offer = $this->repository->find($dto->id, LockMode::PESSIMISTIC_WRITE);
@@ -41,10 +39,10 @@ class ChangeVisibilityCmd
             $offer->setVersion($offer->getVersion() + 1);
             $this->repository->save($offer, true);
 
-            $this->em->commit();
+            $this->repository->commit();
         }
         catch (\Throwable $e) {
-            $this->em->rollback();
+            $this->repository->rollback();
             throw $e;
         }
     }
